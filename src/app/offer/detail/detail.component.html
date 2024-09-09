@@ -1,0 +1,350 @@
+<!-- <router-outlet></router-outlet> -->
+
+<div class="container-fluid">
+    <div class="container">
+        <section id="head">
+            <a class="back-page-btn" mat-button matTooltip="Back" matTooltipPosition="above"  (click)="backClicked()">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            
+            <div class="module-name">
+                <h2>Offer Detail</h2>
+                <p>{{data.data?.code}}</p>
+            </div>
+            <div class="left-auto">
+                <div class="tlp_btn mt0">
+                    <a mat-button routerLink="../../offer-edit/{{this.activatedroute.snapshot.params.id}}" routerLinkActive="active">Edit</a>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container-pd10">
+            
+            <div class="row">
+                <div class="col s12">
+                    <div class="profile-secation padding10 fdc mb10">
+                        <div class="tlp_action fix-top-right">
+                            <!-- <a class="ac-light-grey" matTooltip="Edit" matTooltipPosition="below" routerLink="../ls-offer-add" routerLinkActive="active"><i class="material-icons">create</i></a> -->
+                        </div>
+                        
+                        <div class="profile-detail mb10">
+                            <div class="detail-box pr90">
+                                <span>{{data.data?.title}}</span>
+                                <p>Code : {{data.data?.code}}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-detail">
+                            <!-- <div class="detail-box">
+                                <span>For Architect</span>
+                                <p>{{data.data?.architect_offer == 1 ? 'Yes' : 'No'}} </p>
+                            </div> -->
+
+                            <div class="detail-box">
+                                <span>For Carpenter</span>
+                                <p>{{data.data?.carpenter_offer == 1 ? 'Yes' : 'No'}} </p>
+                            </div>
+
+                            <div class="detail-box">
+                                <span>For Fabricator</span>
+                                <p>{{data.data?.fabricator_offer == 1 ? 'Yes' : 'No'}} </p>
+                            </div>
+                            <div class="detail-box">
+                                <span>Start Date</span>
+                                <p>{{data.data?.start_date | date :'d MMM y, h:mm'}}</p>
+                            </div>
+                            <div class="detail-box">
+                                <span>End Date</span>
+                                <p>{{data.data?.end_date | date :'d MMM y, h:mm'}}</p>
+                            </div>
+                            <div class="detail-box">
+                                <span>Status</span>
+                                <p class="{{data.data?.status ? 'green-clr' : 'red-clr'}}" style="font-weight: 600;">{{data.data?.status ? 'Active' : 'Inactive'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s6" *ngIf="data?.bannerData?.length">
+                    <div class="separate-boder">
+                        <label class="floating-heading">Banners</label>
+                        <div class="row">
+                            <div class="col s12 m4" *ngFor="let row of data?.bannerData" (click)="this.db.openImage(row.banner_filename_path)">
+                                <img [src]="row.banner_filename_path" onError='src="assets/img/default_img.png"' alt="" style="width: 100%; height: 107px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s6" *ngIf="data?.schemeData?.length">
+                    <div class="separate-boder">
+                        <label class="floating-heading">Schemes</label>
+                        <div class="row">
+                            <div class="col s12 m4" *ngFor="let row of data?.schemeData" (click)="this.db.openImage(row.filename_path)">
+                                <img [src]="row.filename_path" onError='src="assets/img/default_img.png"' alt="" style="width: 100%; height: 107px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="separate-boder">
+                        <label class="floating-heading">Description</label>
+                        <div class="editor-description flat-description" [innerHtml]="data?.data?.description">
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="separate-boder mt15">
+                        <label class="floating-heading">Terms & Condition</label>
+                        <div class="editor-description flat-description" [innerHtml]="data?.data?.terms_condition">
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="separate-boder mt15">
+                        <label class="floating-heading">Offer Summary</label>
+                        <div class="editor-description flat-description"  *ngFor="let row of data?.summaryData">
+                            <p>{{row.title}}</p>
+                            <p>{{row.description}}</p>
+                            <span>{{row.created_on | date : 'd MMM y hh:mm a'}}</span>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <div class="col s12 m6">
+                    <div class="separate-boder pb0" *ngIf="data?.giftData?.length">
+                        <label class="floating-heading">Gift Information</label>
+                        <div class="tlp_table left-right-10">
+                            <section class="th_cell">
+                                <main>
+                                    <div class="div_cell mmw50 text-center af-bdr-left">S.No.</div>
+                                    <div class="div_cell mmw50 text-center af-bdr-left"></div>
+                                    <div class="div_cell mw120">Gift Name</div>
+                                    <div class="div_cell mw120">Desc</div>
+                                    <div class="div_cell mmw60">Points</div>
+                                    <div class="div_cell mmw40 af-bdr-right">Action</div>
+                                </main>
+                            </section>
+                            <section class="td_cell">
+                                <main *ngFor="let row of data?.giftData;let i = index">
+                                    <div class="div_cell mmw50 ac"><strong>{{i+1}}</strong></div>
+                                    <div class="div_cell mmw50 ac cursor_zoom">
+                                        <a class="prview" (click)="this.db.openImage(this.db.s3path+row.image_filename)">
+                                            <img *ngIf="row.image_filename"
+                                            [src]="this.db.s3path+row.image_filename"  onError='src="assets/img/default_img.png"' alt="" width="50" height="50">
+                                        </a>
+                                    </div>
+                                    <div class="div_cell mw120">{{row.title}}</div>
+                                    <div class="div_cell" [innerHTML]="row.description"></div>
+                                    <div class="div_cell  mmw60">
+                                        <strong>{{row.points}}</strong>
+                                    </div>
+                                    
+                                    <div class="div_cell  mmw40">
+                                        <div class="tlp_action">
+                                            <!-- <a class="ac-green" routerLink="../ls-gift-add" routerLinkActive="active"><i class="material-icons">edit</i></a> -->
+                                        </div>
+                                    </div>
+                                </main>
+                            </section>
+                        </div>
+                    </div>
+                    
+                    <div class="separate-boder  mt10">
+                        <label class="floating-heading">Offer Applicable Area</label>
+                        <div class="row row-mb0">
+                            <div class="col s12 m12">
+                                <div class="tlp_column">
+                                    <!-- <div class="tlp_head">
+                                        <div class="df ac jsb hp100">
+                                            <mat-checkbox class="font-weight" color="accent">State</mat-checkbox>
+                                            <a class="seacrh-btn" mat-button><i class="material-icons">search</i></a>
+                                            
+                                            <div class="filter-input">
+                                                <input type="text" placeholder="Search ...">
+                                                <a class="close-btn" mat-button><i class="material-icons">close</i></a>
+                                            </div>
+                                        </div> 
+                                    </div> -->
+                                    <div class="check-list flat-list">
+                                        <mat-checkbox color="accent" [checked]="true" disabled *ngFor="let row of data?.areaData">{{row.state_name}}-{{row.district_name}}</mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" *ngIf="data.redeemReqList?.length">
+                <div class="col s12">
+                    <div class="separate-boder">
+                        <label class="floating-heading">Redeem Request History</label>
+                        <div class="tlp_table mobile-table left-right-10">
+                            <!-- Table Head Start-->
+                            <section class="th_cell">
+                                <main>
+                                    <div class="div_cell mmw40 text-center af-bdr-left">S.No.</div>
+                                    <div class="div_cell mmw100">Date</div>
+                                    <div class="div_cell mmw100">Type</div>
+                                    <div class="div_cell mmw90">Req. ID</div>
+                                    <div class="div_cell ">Name</div>
+                                    <div class="div_cell mmw90">Mobile No</div>
+                                    <div class="div_cell mmw120">Gift</div>
+                                    <!-- <div class="div_cell mw120">Offer-valid Upto</div> -->
+                                    <div class="div_cell mmw90">Points</div>
+                                    <div class="div_cell mmw110">Status</div>
+                                    <div class="div_cell mmw100 af-bdr-right">Gift Status</div>
+                                </main>
+                            </section>
+                            
+                            
+                            <section class="td_cell" >
+                                <!-- Loop Data -->
+                                <main *ngFor="let row of data.redeemReqList; let i = index;">
+                                    <div class="div_cell mmw40 ac"><strong>{{i+1}}</strong></div>
+                                    <div class="div_cell mmw100">{{row.created_on | date : 'd MMM y h:mm a'}}</div>
+                                    <div class="div_cell mmw100">{{row.cust_type_name}}</div>
+                                    <div class="div_cell mmw90">
+                                        <a class="link-btn" routerLink="../../redeem-detail/{{row.encrypt_id}}">{{row.redeem_request_id}}</a>
+                                    </div>
+                                    <div class="div_cell ">
+                                        <a class="link-btn"  routerLink="../../dealer-basic/{{row.cust_encrypt_id}}">{{row.first_name}} {{row.last_name}}</a></div> 
+                                        <div class="div_cell mmw90">{{row.mobile}}</div>
+                                        <div class="div_cell mmw120">{{row.gift_title}}</div>
+                                        <!-- <div class="div_cell mw120">
+                                            <div>
+                                                <a class="link-btn"   routerLink="../offer-detail/{{row.offer_encrypt_id}}"> {{row.offer_title}}</a>/ {{row.offer_end_date | date : 'd MMM y'}}
+                                            </div>
+                                        </div> -->
+                                        <div class="div_cell mmw90"><strong>{{row.gift_point}}</strong></div>
+                                        <div class="div_cell mmw110">
+                                            <div class="wp100 df ac jsb">
+                                                <strong class="{{row.redeem_status?.toLowerCase()}}">{{row.redeem_status}}</strong>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="div_cell mmw100 af-bdr-right">
+                                            <div class="wp100 df ac jcs">
+                                                <strong class="{{row.gift_status?.toLowerCase()}}">{{row.gift_status}}</strong>
+                                               
+                                            </div>
+                                        </div>
+                                    </main>
+                                    <!-- Loop Data -->
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="data.couponList?.length">
+                    <div class="col s12">
+                        <div class="separate-boder">
+                            <label class="floating-heading">Coupon Code List</label>
+                            <div class="tlp_table mobile-table left-right-10">
+                                <!-- Table Head Start-->
+                                <section class="th_cell">
+                                    <main>
+                                        <div class="div_cell mmw40 text-center af-bdr-left">S.No.</div>
+                                        <div class="div_cell mmw130">Date / Created By</div>
+                                        <div class="div_cell mw160">Coupon Code</div>
+                                        <div class="div_cell mmw110">Product Code</div>
+                                        <!-- <ng-container *ngIf="tabActive == 'Scanned'">
+                                            <div class="div_cell mw160">Scan Date / Scan By</div>
+                                            <div class="div_cell mw160">State & District</div>
+                                        </ng-container> -->
+                                        <!-- <ng-container *ngIf="tabActive != 'Scanned'"> -->
+                                            <div class="div_cell mmw100 text-center">Scanned By Carpenter</div>
+                                            <div class="div_cell mmw100 text-center">Carpenter Points</div>
+                                            <!-- <div class="div_cell mmw100 text-center">Scanned By Fabricator</div>
+                                            <div class="div_cell mmw100 text-center">Fabricator Points</div> -->
+                                            <!-- </ng-container> -->
+                                        </main>
+                                    </section>
+                                    
+                                    
+                                    <section class="td_cell" >
+                                        <!-- Loop Data -->
+                                        <main *ngFor="let row of data.couponList; let i = index;" >
+                                            <div class="div_cell mmw40 ac"><strong>{{i+1}}</strong></div>
+                                            <div class="div_cell mmw130">{{row.created_on | date : 'd MMM y h:mm a'}} {{row.created_by_name}}</div>
+                                            <div class="div_cell mw160">{{row.coupon_code}}</div>
+                                            <div class="div_cell mmw110">
+                                                <strong>{{row.product_name}}</strong>
+                                            </div>
+                                            <!-- <ng-container *ngIf="tabActive == 'Scanned'">
+                                                <div class="div_cell mw160">{{row.used_on | date : 'd MMM y h:mm a'}} / {{row.used_by_name}}</div>
+                                                <div class="div_cell mw160">{{row.state_name}} - {{row.district_name}}</div>
+                                                
+                                            </ng-container> -->
+                                            <!-- <ng-container *ngIf="tabActive != 'Scanned'"> -->
+                                                
+                                                <div class="div_cell mmw100 ac {{row.checkbg}}">
+                                                    <div class="tick {{row.tnone}}"  *ngIf="row.used_by_carpenter" [matTooltip]="row.used_by_carpenter_name  + '-' +row.used_by_carpenter_mobile" matTooltipPosition="above" >
+                                                        <i class="material-icons">done</i>
+                                                    </div>
+                                                </div>
+                                                <div class="div_cell mmw100 ac {{row.checkbg}}">
+                                                    {{row.carpenter_point}}
+                                                </div>
+                                                <!-- <div class="div_cell mmw100 ac {{row.checkbg}}">
+                                                    <div class="tick {{row.dnone}}" *ngIf="row.used_by_fabricator" [matTooltip]="row.used_by_fabricator_name  + '-' +row.used_by_fabricator_mobile" >
+                                                        <i class="material-icons">done</i>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="div_cell mmw100 ac {{row.checkbg}}">
+                                                    {{row.fabricator_point}}
+                                                </div> -->
+                                                <!-- </ng-container> -->
+                                            </main>
+                                            <!-- Loop Data -->
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="logs-chat">
+                            <button mat-button [matMenuTriggerFor]="menulogs" class="logs-btn">Logs</button>
+                            <mat-menu #menulogs="matMenu" class="botm-matMenu">
+                                <div class="tlp_head white-bg">
+                                    <h2>Summary / Logs</h2>
+                                    <a class="close-btn" mat-button><i class="material-icons">close</i></a>
+                                </div>
+                                <div class="chat-type-logs ">
+
+                                    <div class="logs-info">
+                                        <div class="log-box" *ngFor="let row of data?.summaryData">
+                                            <p >
+                                                <span class="content-bold">{{row.title}}</span>
+                                                <span> on {{row.created_on | date : 'd MMM y hh:mm a'}}</span>
+                                            </p>
+                                            <br>
+                                            <p>{{row.description}}</p>
+                                        </div>
+                                        <!-- <div class="log-box" *ngFor="let row of data?.summaryData">
+                                            <p >
+                                                <span class="content-bold">{{row.title}}</span>
+                                                <span> on {{row.created_on | date : 'd MMM y hh:mm a'}}</span>
+                                            </p>
+                                            <br>
+                                            <p>{{row.description}}</p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </mat-menu>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            

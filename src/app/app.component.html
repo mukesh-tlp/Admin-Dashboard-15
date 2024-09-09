@@ -1,0 +1,4 @@
+<app-header *ngIf="this.db.sessionToken"></app-header>
+<app-left-navigation *ngIf="this.db.sessionToken"></app-left-navigation>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,48 @@
+<div class="login-section">
+    <div class="login-container">
+        <div class="left-login">
+            <div class="wp100">
+                <h1>Login</h1>
+                <form autocomplete="off" (ngSubmit)="f.form.valid && submitLogin(f)" #f="ngForm"  novalidate>
+                    <div class="from-fields no-padding">
+                       
+                        <div class="row mb20 ">
+                            <div class="col s12 no-padding">
+                                <div class="control-field">
+                                    <!-- <div class="mat-label-fix">User Name</div> -->
+                                    <mat-form-field class="tlp_input height-45 paddin-input" color="accent" appearance="outline"  [ngClass]="{'form-invalid' : f.submitted && !form.loginUserName}">
+                                        <input autocomplete="off" matInput placeholder="Type Here.." type="text"[required]="true" name="loginUserName" [(ngModel)]="form.loginUserName">
+                                        <!-- <mat-hint *ngIf="f.submitted && !form.loginUserName">Required</mat-hint> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 no-padding">
+                                <div class="control-field">
+                                    <!-- <div class="mat-label-fix">Password</div> -->
+                                    <mat-form-field class="tlp_input height-45 paddin-input" color="accent" appearance="outline"  [ngClass]="{'form-invalid' : f.submitted && !form.loginPassword}">
+                                        <input autocomplete="off" placeholder="Type Here.." matInput [type]="hidePassword ? 'password' : 'text'"  [required]="true"  name="loginPassword" [(ngModel)]="form.loginPassword">
+                                        <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword" tabindex="-1">
+                                            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                        <!-- <mat-hint *ngIf="f.submitted && !form.loginPassword">Required</mat-hint> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <button mat-button type="submit" matTooltipPosition="below" matTooltip="Login" [ngClass]="{'loading' : formSubmitted == true}"   class="tlp_btn large-btn">Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="right-login">
+            <div class="logo-section">
+                <div>
+                    <img src="assets/img/logo.jpeg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="193" viewBox="0 0 46 193">
+  <g id="Group_4443" data-name="Group 4443" transform="translate(-1314 -288)">
+    <path id="Rectangle_3879" data-name="Rectangle 3879" d="M10,0H46a0,0,0,0,1,0,0V193a0,0,0,0,1,0,0H10A10,10,0,0,1,0,183V10A10,10,0,0,1,10,0Z" transform="translate(1314 288)" fill="#27ab00"/>
+    <text id="n_o_t_e_p_a_d" data-name="n
+o
+t
+e
+p
+a
+d" transform="translate(1335 352)" fill="#fff" font-size="16" font-family="Colfax-Medium, Colfax" font-weight="500"><tspan x="-5.832" y="0">N</tspan><tspan x="-5.888" y="19">O</tspan><tspan x="-4.704" y="38">T</tspan><tspan x="-4.944" y="57">E</tspan><tspan x="-5.216" y="76">P</tspan><tspan x="-5.52" y="95">A</tspan><tspan x="-5.624" y="114">D</tspan></text>
+    <g id="write" transform="translate(1323.993 298)">
+      <path id="Path_1379" data-name="Path 1379" d="M29.493,10.947,28.026,9.48a1.76,1.76,0,0,0-2.486,0l-3.091,3.091V2.637A2.64,2.64,0,0,0,19.812,0H2.644A2.64,2.64,0,0,0,.007,2.637V27.364A2.64,2.64,0,0,0,2.644,30H19.812a2.64,2.64,0,0,0,2.637-2.637V20.389l7.044-6.956a1.76,1.76,0,0,0,0-2.486Zm-10.512,10.4-2.644,1.234,1.233-2.641,6.561-6.561,1.451,1.451Zm1.71,6.021a.88.88,0,0,1-.879.879H2.644a.88.88,0,0,1-.879-.879V2.637a.88.88,0,0,1,.879-.879H19.812a.88.88,0,0,1,.879.879V14.328c-4.874,4.874-4.556,4.524-4.649,4.724l-2.32,4.972a.879.879,0,0,0,1.168,1.168l4.972-2.32c.182-.085.212-.138.829-.747ZM26.832,13.59l-1.458-1.458,1.409-1.409,1.467,1.468Z" fill="#fff"/>
+      <path id="Path_1380" data-name="Path 1380" d="M65.886,98.758H79.011a.879.879,0,0,0,0-1.758H65.886a.879.879,0,0,0,0,1.758Z" transform="translate(-61.191 -91.316)" fill="#fff"/>
+      <path id="Path_1381" data-name="Path 1381" d="M65.886,178.758H76.2a.879.879,0,1,0,0-1.758H65.886a.879.879,0,1,0,0,1.758Z" transform="translate(-61.191 -166.629)" fill="#fff"/>
+      <path id="Path_1382" data-name="Path 1382" d="M73.386,257h-7.5a.879.879,0,0,0,0,1.758h7.5a.879.879,0,0,0,0-1.758Z" transform="translate(-61.191 -241.941)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

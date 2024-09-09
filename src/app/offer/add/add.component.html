@@ -1,0 +1,387 @@
+<!-- <router-outlet></router-outlet> -->
+
+<style>
+    mat-hint{
+        color: #c92028;
+    }
+</style>
+<div class="container-fluid">
+    <div class="container">
+        <section id="head">
+            <a class="back-page-btn" mat-button matTooltip="Back" matTooltipPosition="above"  (click)="backClicked()">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            
+            <div class="module-name">
+                <h2>Offers</h2>
+                <p>{{this.actRoute.snapshot.params.id ? 'Update Offer   ' : 'Add New Offers'}} </p>
+            </div>
+            
+            <div class="left-auto df afe">
+                <div class="indicates">
+                    Indicates required fields ( <span>*</span> ) 
+                </div>
+            </div>
+        </section>
+        <form autocomplete="off" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm"  novalidate>
+            
+            <div class="container-pd10-5 bottom-new-calc">
+                
+                <div class="row">
+                    <div class="col s12">
+                        <div class="tlp_column">
+                            <div class="tlp_head">
+                                <h2>which type of offer</h2>
+                            </div>
+                            <div class="tlp_form">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <div class="form-column">
+                                            <div class="name">Select Type <sup>*</sup></div>
+                                            <div class="check-radio">
+                                                <!-- <mat-radio-group (ngModelChange)="setApplicableForName()"> -->
+                                                    <!-- <mat-checkbox class="w200" [(ngModel)]="form.architect_offer" name="architect_offer" color="accent" value="1" (change)="getGifts($event)">Architect</mat-checkbox> -->
+                                                    <mat-checkbox class="w200"  [(ngModel)]="form.carpenter_offer" name="carpenter_offer"  color="accent" value="1" (change)="getGifts($event)">Carpenter</mat-checkbox>
+                                                    <mat-checkbox class="w200"  [(ngModel)]="form.fabricator_offer" name="fabricator_offer" color="accent" value="1" (change)="getGifts($event)">Fabricator</mat-checkbox>
+                                                    <!-- </mat-radio-group> -->
+                                                    <!-- <mat-hint *ngIf="f.submitted && !form.applicable_for">Required</mat-hint> -->
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- <mat-form-field appearance="outline" class="tlp_input">
+                                                <mat-label>Offer Applicable For</mat-label>
+                                                <mat-select placeholder="Type Here ..." [required]="true" [(ngModel)]="form.applicable_for" multiple>
+                                                    <mat-option value="Retailer">Retailer</mat-option>
+                                                    <mat-option value="Distributor">Distributor</mat-option>
+                                                    <mat-option value="Sales User">Sales User</mat-option>
+                                                </mat-select>
+                                                <mat-hint *ngIf="f.submitted && !form.applicable_for">Required</mat-hint>
+                                            </mat-form-field> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <div class="tlp_column">
+                                <div class="tlp_head">
+                                    <h2>offer information</h2>
+                                </div>
+                                
+                                <div class="tlp_form">
+                                    <div class="row row-mb0">
+                                        <div class="col s9">
+                                            <mat-form-field appearance="outline" class="tlp_input">
+                                                <mat-label>Offer Title</mat-label>
+                                                <input matInput placeholder="Type Here ..." type="text" [(ngModel)]="form.title" required name="title">
+                                                
+                                                <mat-hint *ngIf="f.submitted && !form.title">Required</mat-hint>
+                                            </mat-form-field>
+                                        </div>
+                                        
+                                        <div class="col s3">
+                                            <mat-form-field appearance="outline" class="tlp_input">
+                                                <mat-label>Offer Code</mat-label>
+                                                <input matInput placeholder="Type Here ..." type="text" [(ngModel)]="form.code" required name="code">
+                                                
+                                            </mat-form-field>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col s12 m3">
+                                            <mat-form-field appearance="outline" class="tlp_input flat-padding">
+                                                <mat-label>Start Date</mat-label>
+                                                <input matInput  required name="start_date" [min]="todayDate" [(ngModel)]="form.start_date" type="date" >
+                                                <!-- <mat-datepicker-toggle matSuffix [for]="first"></mat-datepicker-toggle>
+                                                    <mat-datepicker #first></mat-datepicker> -->
+                                                    
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col s12 m3 mob-mt10">
+                                                <mat-form-field appearance="outline" class="tlp_input flat-padding">
+                                                    <mat-label>End Date</mat-label>
+                                                    <input matInput  required placeholder="Type Here" name="end_date" [min]="form.start_date ? form.start_date : todayDate" [(ngModel)]="form.end_date" type="date">
+                                                    <!-- <mat-datepicker-toggle matSuffix [for]="two"></mat-datepicker-toggle>
+                                                        <mat-datepicker #two></mat-datepicker> -->
+                                                        
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col s12 m6 mob-mt10">
+                                                    <div class="form-column">
+                                                        <div class="name">Status <sup>*</sup></div>
+                                                        <div class="check-radio">
+                                                            <mat-radio-group  [(ngModel)]="form.status" name="status" required>
+                                                                <mat-radio-button  color="accent" value="1">Active</mat-radio-button>
+                                                                <mat-radio-button  color="accent" value="0">Inactive</mat-radio-button>
+                                                            </mat-radio-group>
+                                                            <mat-hint *ngIf="f.submitted && !form.status">Required</mat-hint>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tlp_column mt10">
+                                        <div class="tlp_head">
+                                            <h2>Description</h2>
+                                        </div>
+                                        <div class="tlp_texteditor">
+                                            <ejs-richtexteditor [(ngModel)]="form.description" required name="description"></ejs-richtexteditor>
+                                            <mat-hint *ngIf="f.submitted && !form.description">Required</mat-hint>
+                                            
+                                        </div>
+                                    </div>
+                                    <div  class="tlp_column mt10">
+                                        <div class="tlp_head">
+                                            <h2>terms & condition</h2>
+                                        </div>
+                                        <div class="tlp_texteditor">
+                                            <ejs-richtexteditor [(ngModel)]="form.terms_condition" required name="terms_condition"></ejs-richtexteditor>
+                                            <mat-hint *ngIf="f.submitted && !form.terms_condition">Required</mat-hint>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="col s6">
+                                        <div class="tlp_column mt10">
+                                            <div class="tlp_head">
+                                                <h2>Upload Banner</h2>
+                                            </div>
+                                            
+                                            <div class="tlp_upload" style="padding: 5px 5px 0px 5px;">
+                                                <label class="file-upload">
+                                                    <i class="material-icons">add</i>
+                                                    <input autocomplete="off" type="file" style="display: none;" accept="image/*" [(ngModel)]="form.image" name="image" (change)="changeListener($event)" />    
+                                                </label>
+                                                
+                                                <div class="prview"  *ngFor="let row of form.bannerData;let i = index">
+                                                    <div class="prview" (click)="this.db.openImage(this.db.s3path+row.banner_filename)" style="margin-left: 0px;">
+                                                        <img  [src]="this.db.s3path+row.banner_filename" onError='src="assets/img/default_img.png"'>
+                                                    </div>
+                                                    <button class="clc" (click)="removeBanner(i)">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div  class="col s6">
+                                        <div class="tlp_column mt10">
+                                            <div class="tlp_head">
+                                                <h2>Upload Scheme</h2>
+                                            </div>
+                                            <div class="tlp_upload" style="padding: 5px 5px 0px 5px;">
+                                                <label class="file-upload">
+                                                    <i class="material-icons">add</i>
+                                                    <input autocomplete="off" type="file" style="display: none;" accept="image/*" [(ngModel)]="form.scheme_image" name="scheme_image" (change)="changeListenerScheme($event)" />    
+                                                </label>
+                                                
+                                                <div class="prview"  *ngFor="let row of form.schemeData;let i = index">
+                                                    <div class="prview" (click)="this.db.openImage(this.db.s3path+row.filename)" style="margin-left: 0px;">
+                                                        <img  [src]="this.db.s3path+row.filename" onError='src="assets/img/default_img.png"'>
+                                                    </div>
+                                                    <button class="clc" (click)="removeScheme(i)">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="col s12 m6 mob-mt10">
+                                    <div class="tlp_column">
+                                        <div class="tlp_head">
+                                            <h2>area wise selection</h2>
+                                        </div>
+                                        
+                                        <div class="tlp_form padding10">
+                                            <div class="row row-mb0">
+                                                <div class="col s12 m6 ">
+                                                    <div class="tlp_column">
+                                                        <div class="tlp_head">
+                                                            <div class="df ac jsb hp100">
+                                                                <mat-checkbox *ngIf="!form.searchActiveState" (change)="stateSelectAllHandler($event)" class="font-weight" color="accent">State</mat-checkbox>
+                                                                <!-- <p *ngIf="!form.searchActiveState">
+                                                                    State
+                                                                </p>  -->
+                                                                <a *ngIf="!form.searchActiveState" class="seacrh-btn" mat-button (click)="form.searchActiveState = true"><i class="material-icons">search</i></a>
+                                                                
+                                                                <div class="filter-input {{form.searchActiveState ? 'active' : ''}}">
+                                                                    <input type="text" placeholder="Search ..." name="search" [(ngModel)]="searchState" matInput placeholder="Search Here ..." type="search" (keyup.enter)="getStates()">
+                                                                    <a class="close-btn" mat-button (click)="searchState='';getStates();form.searchActiveState = false"><i class="material-icons">close</i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="check-list flat-list">
+                                                            <mat-checkbox color="accent" *ngFor="let row of states"  [name]="row.state_name+row.checked" [(ngModel)]="row.checked" color="accent" (ngModelChange)="getDistricts()">
+                                                                {{row.state_name}} 
+                                                            </mat-checkbox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col s12 m6 mob-mt10">
+                                                    <div class="tlp_column">
+                                                        <div class="tlp_head">
+                                                            <div class="df ac jsb hp100">
+                                                                <mat-checkbox class="font-weight"  (change)="districtSelectAllHandler($event)" *ngIf="!form.searchActiveDistrict" color="accent">District</mat-checkbox>
+                                                                
+                                                                <!-- <p *ngIf="!form.searchActiveDistrict">
+                                                                    District
+                                                                </p>  -->
+                                                                <a *ngIf="!form.searchActiveDistrict" class="seacrh-btn" mat-button (click)="form.searchActiveDistrict = true"><i class="material-icons">search</i></a>
+                                                                
+                                                                <div class="filter-input {{form.searchActiveDistrict ? 'active' : ''}}">
+                                                                    <input type="text" placeholder="Search ..." name="search" [(ngModel)]="searchDistrict" matInput placeholder="Search Here ..." type="search" (keyup.enter)="getDistricts()">
+                                                                    <a class="close-btn" mat-button (click)="searchDistrict='';getDistricts();form.searchActiveDistrict = false"><i class="material-icons">close</i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="check-list flat-list">
+                                                            <mat-checkbox color="accent" *ngFor="let row of districts"  [name]="row?.district_name+row?.checked" [(ngModel)]="row.checked" color="accent" >
+                                                                {{row.district_name}} 
+                                                            </mat-checkbox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tlp_column mt10">
+                                        <div class="tlp_head">
+                                            <h2>add gift</h2>
+                                        </div>
+                                        <div class="tlp_form">
+                                            <div class="row row-mb0">
+                                                <div class="col s2" hidden>
+                                                    <mat-label>Upload</mat-label>
+                                                    <div class="tlp_upload" style="width: 87px; height: 87px; border: solid 1px #ccc;">
+                                                        <label class="file-upload">
+                                                            <!-- <i class="material-icons">add</i> -->
+                                                            <!-- <input autocomplete="off" type="file" style="display: none;" accept="image/*" (change)="changeListenerGift($event)" />     -->
+                                                        </label>
+                                                        <!-- <a class="prview" *ngIf="form.gift?.image_filename || form.gift?.image_filename_loading" (click)="this.db.openImage(this.db.s3path+form.gift.image_filename)"> -->
+                                                            <!-- <img [src]="form.detailData.thumbnail_path_location" alt=""> -->
+                                                            <img *ngIf="form.gift.image_filename" [src]="this.db.s3path+form.gift.image_filename" alt="" width="50" height="50">
+                                                            <img *ngIf="form.gift.image_filename_loading" src="assets/img/loading-gif.gif" alt="" class="lg">
+                                                            <!-- </a> -->
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col s4" >
+                                                        <mat-form-field appearance="outline" class="tlp_input">
+                                                            <mat-label>Select Gift</mat-label>
+                                                            <!-- <input [(ngModel)]="form.gift.gift_name"  name="gift_name" autocomplete="off" matInput placeholder="Type Here ..." type="text"  > -->
+                                                            <!-- <select name="name" [(ngModel)]="form.gift.gift_name"  (ngModelChange)="giftHandler()" name="gift_name"  id="type">
+                                                                <option value="">Select an option</option>
+                                                                <option *ngFor="let row of gifts" [value]="row">{{row.title}}</option>
+                                                                
+                                                            </select> -->
+                                                            <mat-select  name="name" [(ngModel)]="form.gift.gift_name"  (ngModelChange)="giftHandler()" name="gift_name">
+                                                                <mat-option value="">Select an option</mat-option>
+                                                                <mat-option *ngFor="let row of gifts" [value]="row">{{row.title}}</mat-option>
+                                                            </mat-select>
+                                                            
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col s3" >
+                                                        <mat-form-field appearance="outline" class="tlp_input">
+                                                            <mat-label>Title</mat-label>
+                                                            <input  readonly [(ngModel)]="form.gift.title"  name="gift_title" autocomplete="off" matInput placeholder="Type Here ..." type="text"  >
+                                                            
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col s3">
+                                                        <mat-form-field appearance="outline" class="tlp_input">
+                                                            <mat-label>Description</mat-label>
+                                                            <input  readonly [(ngModel)]="form.gift.description" [innerHTML]="form.gift.description"  name="gift_description" autocomplete="off" matInput placeholder="Type Here ..." type="text" >
+                                                            
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col s4">
+                                                        <mat-form-field appearance="outline" class="tlp_input">
+                                                            <mat-label>Points</mat-label>
+                                                            <input  readonly [(ngModel)]="form.gift.points"  numbersOnly name="points" autocomplete="off" matInput placeholder="Type Here ..." type="text" >
+                                                            
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col s1">
+                                                        <div class="tlp_btn mt2">
+                                                            <a  mat-button (click)="addToList()">Add</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tlp_table mobile-table"  *ngIf="form.giftData?.length">
+                                                <section class="th_cell">
+                                                    <main>
+                                                        <div class="div_cell mmw50 text-center af-bdr-left">S.No.</div>
+                                                        <div class="div_cell mmw50">Image</div>
+                                                        <div class="div_cell mmw90">Title</div>
+                                                        <div class="div_cell">Description</div>
+                                                        <!-- <div class="div_cell mmw90">Terms & Conditions</div> -->
+                                                        <div class="div_cell mmw80">Points</div>
+                                                        <div class="div_cell mmw80">Status</div>
+                                                        <div class="div_cell text-center af-bdr-right">Action</div>
+                                                    </main>
+                                                </section>
+                                                <section class="td_cell">
+                                                    <main  *ngFor="let row of form.giftData; let i = index;">
+                                                        <div class="div_cell mmw50 text-center af-bdr-left">{{i+1}}</div>
+                                                        <div class="div_cell mmw50 cursor_zoom">
+                                                            <a class="prview" (click)="this.db.openImage(this.db.s3path+row.image_filename)">
+                                                                <img *ngIf="row.image_filename"
+                                                                [src]="this.db.s3path+row.image_filename"  onError='src="assets/img/default_img.png"' alt="" width="50" height="50">
+                                                            </a>
+                                                        </div>
+                                                        <div class="div_cell mmw90" >
+                                                            {{row.title}}
+                                                        </div>
+                                                        <div class="div_cell" [innerHTML]="row.description">
+                                                        </div>
+                                                        <!-- <div class="div_cell mmw90" >
+                                                            {{row.terms_condition}}
+                                                        </div> -->
+                                                        <div class="div_cell mmw80" >
+                                                            {{row.points}}
+                                                        </div>
+                                                        <div class="div_cell mmw80" >
+                                                            {{row.status ? 'Active' : 'Inactive'}}
+                                                        </div>
+                                                        <div class="div_cell text-center">
+                                                            <div class="tlp_action wp100">
+                                                                <a class="ac-red" matTooltip="Delete" matTooltipPosition="below" (click)="removeItem(i)"><i class="material-icons">delete_sweep</i></a>
+                                                            </div>
+                                                        </div>
+                                                    </main>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row" style="margin-bottom: 40px;">
+                                    <div class="col s12">
+                                        <div class="tlp_btn">
+                                            <button mat-button  type="submit">{{this.actRoute.snapshot.params.id ? 'Update' : 'Save'}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                

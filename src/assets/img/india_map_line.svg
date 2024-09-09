@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="516" height="37" viewBox="0 0 516 37">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e7f6ff"/>
+      <stop offset="1" stop-color="#007aff"/>
+    </linearGradient>
+  </defs>
+  <g id="india_map_line" transform="translate(-454 -659)">
+    <rect id="Rectangle_3859" data-name="Rectangle 3859" width="500" height="10" transform="translate(457 659)" fill="url(#linear-gradient)"/>
+    <line id="Line_2586" data-name="Line 2586" y2="20" transform="translate(457.5 659)" fill="none" stroke="#000" stroke-width="2"/>
+    <line id="Line_2586-2" data-name="Line 2586" y2="20" transform="translate(557.5 659)" fill="none" stroke="#000" stroke-width="2"/>
+    <line id="Line_2586-3" data-name="Line 2586" y2="20" transform="translate(656.5 659)" fill="none" stroke="#000" stroke-width="2"/>
+    <line id="Line_2586-4" data-name="Line 2586" y2="20" transform="translate(756.5 659)" fill="none" stroke="#000" stroke-width="2"/>
+    <line id="Line_2586-5" data-name="Line 2586" y2="20" transform="translate(856.5 659)" fill="none" stroke="#000" stroke-width="2"/>
+    <line id="Line_2586-6" data-name="Line 2586" y2="20" transform="translate(956.5 659)" fill="none" stroke="#000" stroke-width="2"/>
+    <text id="_0" data-name="0" transform="translate(458 692)" font-size="12" font-family="Colfax-Regular, Colfax"><tspan x="-3.78" y="0">0</tspan></text>
+    <text id="_1L" data-name="1L" transform="translate(558 692)" font-size="12" font-family="Colfax-Regular, Colfax"><tspan x="-5.514" y="0">1L</tspan></text>
+    <text id="_2L" data-name="2L" transform="translate(657 692)" font-size="12" font-family="Colfax-Regular, Colfax"><tspan x="-6.996" y="0">2L</tspan></text>
+    <text id="_3L" data-name="3L" transform="translate(757 692)" font-size="12" font-family="Colfax-Regular, Colfax"><tspan x="-7.062" y="0">3L</tspan></text>
+    <text id="_4L" data-name="4L" transform="translate(857 692)" font-size="12" font-family="Colfax-Regular, Colfax"><tspan x="-7.086" y="0">4L</tspan></text>
+    <text id="_5L" data-name="5L" transform="translate(957 692)" font-size="12" font-family="Colfax-Regular, Colfax"><tspan x="-7.158" y="0">5L</tspan></text>
+    <text id="_" data-name="+" transform="translate(966 686)" font-size="12" font-family="Colfax-Medium, Colfax" font-weight="500"><tspan x="-3.612" y="0">+</tspan></text>
+  </g>
+</svg>

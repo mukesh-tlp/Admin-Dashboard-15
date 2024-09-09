@@ -1,0 +1,72 @@
+<header>
+    <div class="master-action">
+        
+        <div class="mobile-logo">
+            <img src="assets/img/logo.jpeg" alt="Logo">
+        </div>
+        
+        <div class="hamburger web" (click)="toggleHeader()">
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+        </div>
+        
+        <div class="hamburger mobile" (click)="openNav()">
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+        </div>
+        
+        <!-- <div class="master-select" *ngIf="(router.url.includes('dnm_mangement') || router.url.includes('ddm_mangement') || router.url.includes('dm_mangement'))">
+            <mat-form-field>
+                <mat-select name="project_type" [(ngModel)]="project_type" (ngModelChange)="onChange(project_type)">
+                    <mat-option value="distributor" routerLink="../dnm_mangement/distribution-detail" routerLinkActive="active">Distributor</mat-option>
+                    <mat-option value="direct-dealer" routerLink="../ddm_mangement/direct-dealer-detail" routerLinkActive="active">Direct Dealer</mat-option>
+                    <mat-option value="dealer" routerLink="../dm_mangement/dealer-detail" routerLinkActive="active">Dealer</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> -->
+        <div class="ds-search">
+            <input type="text" placeholder="Search . . ." name="masterSearch" [(ngModel)]="masterSearch" (ngModelChange)="masterSearch.length > 3 ? getData() : ''">
+           
+            <button class="crii" *ngIf="masterSearch" (click)="this.masterSearch=''; getData();" mat-button><mat-icon>cancel</mat-icon></button>
+
+            <ul class="s_list">
+                <li *ngFor="let row of searchData">
+                    <a (click)="searchItemClickhandler(row)"><span>{{row.name}}</span> <mat-icon>keyboard_arrow_right</mat-icon></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- <app-notepad></app-notepad> -->
+    
+    
+    <div class="left-auto df ac">
+        
+        
+        <!-- <div class="mdbtns">
+            <button mat-button matTooltipPosition="below" matTooltip="Small" (click)="zoom('90%');"  [style.color]="fontSize == '90%' ? 'black' : ''"  [style.background]="fontSize == '90%' ? 'white' : ''">
+                A-
+            </button>
+            <button mat-button matTooltipPosition="below" matTooltip="Medium" (click)="zoom('100%');"  [style.color]="fontSize == '100%' ? 'black' : ''"  [style.background]="fontSize == '100%' ? 'white' : ''">
+                A
+            </button>
+            <button mat-button matTooltipPosition="below" matTooltip="Large" (click)="zoom('110%');"  [style.color]="fontSize == '110%' ? 'black' : ''"  [style.background]="fontSize == '110%' ? 'white' : ''">
+                A+
+            </button>
+            <button mat-button matTooltipPosition="below" matTooltip="Extra Large" (click)="zoom('120%');"  [style.color]="fontSize == '120%' ? 'black' : ''"  [style.background]="fontSize == '120%' ? 'white' : ''">
+                A++
+            </button>
+        </div> -->
+        <div class="logout-section df ac">
+            <div class="name-section">
+                <!-- <h1>{{!db.userLoginData.customer_name?'':db.userLoginData.customer_name}}</h1> -->
+                <p>Welcome:- {{userData.name}}<br>({{userData.role_name}})</p>
+            </div>
+            <button mat-button matTooltipPosition="below" matTooltip="Logout" (click)="logout();">
+                <i class="material-icons">power_settings_new</i>
+            </button>
+        </div>
+    </div>
+</header>

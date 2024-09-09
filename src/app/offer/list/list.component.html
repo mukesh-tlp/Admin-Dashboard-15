@@ -1,0 +1,350 @@
+<!-- <router-outlet></router-outlet> -->
+
+
+<div class="container-fluid">
+    <div class="container">
+
+        <ng-container *ngIf="reqSent">
+
+            <section id="head" class="ac">
+                <div class="module-name">
+                    <h2>Offers</h2>
+                    <p>{{totalLength}} Offers Are Available</p>
+                </div>
+                <div class="tlp_tabs ml10">
+                    <ul>
+                        <li *ngFor="let row of counters" (click)="tabActive = row.type;getData()"
+                            [ngClass]="{'active' : tabActive == row.type}">
+                            {{row.name}}
+                            <span>{{row.count}}</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="left-auto">
+                    <div class="tlp_form no-padding">
+                        <div class="df afs">
+                            <mat-form-field appearance="outline" class="tlp_input flat-padding" (click)="from.open()">
+                                <mat-label>Date From</mat-label>
+                                <input matInput [matDatepicker]="from" placeholder="Type Here" name="type"
+                                    [(ngModel)]="filter.date_from" [max]="todayDate">
+                                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                                <mat-datepicker #from></mat-datepicker>
+                                <!-- <mat-hint>required</mat-hint> -->
+                            </mat-form-field>
+
+
+                            <mat-form-field appearance="outline" class="tlp_input flat-padding ml10"
+                                (click)="five.open()">
+                                <mat-label>Date To</mat-label>
+                                <input matInput [matDatepicker]="five" placeholder="Type Here" name="type"
+                                    [(ngModel)]="filter.date_to" [max]="todayDate">
+                                <mat-datepicker-toggle matSuffix [for]="five"></mat-datepicker-toggle>
+                                <mat-datepicker #five></mat-datepicker>
+                                <!-- <mat-hint>required</mat-hint> -->
+                            </mat-form-field>
+
+                            <a class="add-item text-btn ml10" mat-raised-button (click)="getData()">Go</a>
+
+                            <div class="tlp_btn mt0" style="padding-left:10px">
+                                <a mat-button routerLink="../offer-add" routerLinkActive="active" *ngIf="this.checkModulePermission.add">Add new</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="tlp_btn mt0">
+                        <a mat-button routerLink="../../lead-add/{{this.activatedroute.snapshot.params.type}}" routerLinkActive="active">Add new</a>
+                    </div> -->
+                </div>
+                <!-- <div class="left-auto">
+                    <div class="tlp_btn mt0">
+                        <a mat-button routerLink="../offer-add" routerLinkActive="active">Add new</a>
+                    </div>
+                </div> -->
+            </section>
+
+            <div class="container-pd10-5 bottom-calc no-padding">
+                <div class="tlp_table">
+
+                    <!-- Table Head Start-->
+                    <figure class="table-head">
+                        <section class="th_cell">
+                            <main>
+                                <div class="div_cell mmw50 text-center af-bdr-left">S.No.</div>
+                                <div class="div_cell mmw120">Date Created</div>
+                                <!-- <div class="div_cell mmw100">Image</div> -->
+
+                                <div class="div_cell mmw90">Offer For</div>
+                                <div class="div_cell">Offer Name</div>
+                                <div class="div_cell mmw90">Offer Code</div>
+                                <div class="div_cell mmw100">Start Date</div>
+                                <div class="div_cell mmw100">End Date</div>
+                                <!-- <div class="div_cell mmw80">Total Coupon</div> -->
+                                <div class="div_cell mmw80">Gift</div>
+                                <div class="div_cell mmw70">Status</div>
+                                <div class="div_cell text-center mmw70 af-bdr-right">Action</div>
+                            </main>
+                        </section>
+                        <section class="th_cell">
+                            <main>
+                                
+                                <div class="div_cell mmw50 text-center af-bdr-left"></div>
+                            
+                                <div class="div_cell mmw120"></div>
+                                <div class="div_cell mmw90"></div>
+                                <!-- <div class="div_cell mw130">
+                                    <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off"  name="title" [(ngModel)]="filter.title" (keyup.enter)="getData()" type="text" placeholder="Search ..." >
+                                    </div>
+                                </div> -->
+                                <!-- <div class="div_cell mmw100"></div> -->
+
+
+                                <!-- <div class="div_cell mmw90">
+                                    <div class="filter-data">
+                                        <mat-select placeholder="status" name="applicable_for_name" [(ngModel)]="filter.applicable_for_name" (ngModelChange)="getData()">
+                                            <mat-option value="">All</mat-option>
+                                            <mat-option value="Carpenter">Carpenter</mat-option>
+                                            <mat-option value="Fabricator">Fabricator</mat-option>
+                                        </mat-select>                                
+                                    </div>
+                                </div> -->
+                                <div class="div_cell">
+                                     <!-- <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off" name="applicable_for_name" [(ngModel)]="filter.applicable_for_name"
+                                            (keyup.enter)="getData()" type="text" placeholder="Search ...">
+                                    </div> -->
+                                </div> 
+                                <div class="div_cell mmw90">
+                                    <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off" name="code" [(ngModel)]="filter.code"
+                                            (keyup.enter)="getData()" type="text" placeholder="Search ...">
+                                    </div>
+                                </div>
+
+                                <div class="div_cell mmw100">
+                                </div>
+                                <div class="div_cell mmw100">
+
+                                </div>
+
+                                <div class="div_cell mmw80">
+                                    <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off" name="applicable_for_name" [(ngModel)]="filter.name"
+                                            (keyup.enter)="getData()" type="text" placeholder="Search ...">
+                                    </div>
+                                </div>
+
+                                <!-- <div class="div_cell mmw80">
+                                    
+                                </div> -->
+                                <!-- <div class="div_cell mmw85">
+                                    
+                                </div> -->
+                                <!-- <div class="div_cell text-center mmw70 af-bdr-right">Action</div> -->
+                                <!-- <div class="div_cell mmw50 text-center af-bdr-left">&nbsp;</div> -->
+
+                                <!-- <div class="div_cell mmw150">
+                                    <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off"  name="title" [(ngModel)]="filter.title" (keyup.enter)="getData()" type="text" placeholder="Search ..." >
+                                    </div>
+                                </div>
+                            
+                                <div class="div_cell mmw120">
+                                    <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off"  name="applicable_for_name" [(ngModel)]="filter.applicable_for_name" (keyup.enter)="getData()" type="text" placeholder="Search ..." >
+                                    </div>
+                                </div>
+                                
+                                <div class="div_cell mmw120">
+                                    <div class="filter-data">
+                                        <i class="material-icons">search</i>
+                                        <input autocomplete="off"  name="code" [(ngModel)]="filter.code" (keyup.enter)="getData()" type="text" placeholder="Search ..." >
+                                    </div>
+                                </div>
+                                
+                                <div class="div_cell mmw120">
+                                    <div class="filter-data">
+                                        <mat-select placeholder="Select Product Unit status" name="status" [(ngModel)]="filter.status" (ngModelChange)="getData()">
+                                            <mat-option value="">Select an option</mat-option>
+                                            <mat-option value="1">Active</mat-option>
+                                            <mat-option value="0">Inactive</mat-option>
+                                        </mat-select>           
+                                    </div>
+                                </div>
+                              -->
+                                <div class="div_cell text-center mmw70 ">
+                                    <div class="filter-data">
+                                        <mat-select placeholder="Select Product Color status" name="status" [(ngModel)]="filter.status" (ngModelChange)="getData()">
+                                            <mat-option value="">Select an option</mat-option>
+                                            <mat-option value="1">Active</mat-option>
+                                            <mat-option value="0">Inactive</mat-option>
+                                        </mat-select>                                
+                                    </div>
+                               
+                                </div>
+                                <div class="div_cell text-center mmw70 af-bdr-right">
+                                    <div class="tlp_action">
+                                        <a (click)="getData()" class="ac-grey" matTooltip="Search"
+                                            matTooltipPosition="below"><i class="material-icons">search</i></a>
+                                        <a (click)="refresh()" class="ac-refresh" matTooltip="Refresh"
+                                            matTooltipPosition="below"><i
+                                                class="material-icons">settings_backup_restore</i></a>
+                                    </div>
+                                </div>
+                            </main>
+                        </section>
+                    </figure>
+                    <!-- Table Head End -->
+
+
+
+                    <section class="td_cell">
+                        <!-- Loop Data -->
+                        <main *ngFor="let row of data; let i = index;">
+
+
+                            <div class="div_cell mmw50 ac"><strong>{{((tempPageNo-1)*limit) + (i+1)}}</strong></div>
+                            <div class="div_cell mmw120">{{row.created_on | date :'d MMM y, h:mm'}} </div>
+                            <!-- <div class="div_cell mmw100 ac cursor_zoom">
+                                <a class="prview" (click)="this.db.openImage(this.db.s3path+row.image_filename)">
+                                    <img *ngIf="row.image_filename"
+                                    [src]="this.db.s3path+row.image_filename"  onError='src="assets/img/default_img.png"' alt="" width="50" height="50">
+                                </a>
+                            </div> -->
+                            <div class="div_cell mmw90">
+                                <div class="tlp_chips">
+                                    <span *ngFor="let data of row?.offer_for">{{data.name}}</span>
+                                </div>
+                                 <!-- {{row.applicable_for_name}} -->
+                            </div>
+                            <div class="div_cell mw130"><a class="link-btn"
+                                    routerLink="../offer-detail/{{row.encrypt_id}}"
+                                    routerLinkActive="active">{{row.title}}</a></div>
+                            <div class="div_cell mmw90">{{row.code}}</div>
+                            <div class="div_cell mmw100">{{row.start_date | date :'d MMM y'}}</div>
+                            <div class="div_cell mmw100">{{row.end_date | date :'d MMM y'}}</div>
+                            <!-- <div  class="div_cell mmw80 text-center" >{{row.couponCount}}</div> -->
+                            <div class="div_cell mmw80 text-center">{{row.giftCount}}</div>
+                            <div class="div_cell mmw70 jc">
+                                <div class="wp100 df jc">
+                                    <!-- <mat-slide-toggle [(ngModel)]="row.status" [name]="row.encrypt_id"
+                                        (ngModelChange)="changeStatus(row)">&nbsp;</mat-slide-toggle> -->
+                                </div>
+                            </div>
+                            <!-- <div class="div_cell mmw85"><strong class="{{row.statusclr}}">{{row.status==0 ? 'Inactive' : 'Active'}}</strong></div> -->
+                            <div class="div_cell ac mmw70">
+                                <div class="tlp_action">
+                                    <a class="ac-green" matTooltip="Edit" matTooltipPosition="below"
+                                        routerLink="../offer-edit/{{row.encrypt_id}}" *ngIf="this.checkModulePermission.edit"><i
+                                            class="material-icons" >create</i></a>
+                                    <!-- <a class="ac-red" (click)="delete(row)" matTooltip="Delete" -->
+                                        <!-- matTooltipPosition="below" *ngIf="this.checkModulePermission.delete"><i class="material-icons" >delete_sweep</i></a> -->
+                                </div>
+                            </div>
+                        </main>
+                        <!-- Loop Data -->
+                    </section>
+                </div>
+                <!-- If Data Not Found Section Start -->
+                <div class="no-data text-center" *ngIf="dataNotFound">
+                    <img src="assets/img/no-result.svg" alt="">
+                    <p>Data Not Available</p>
+                </div>
+                <!-- If Data Not Found Section End -->
+
+                <!-- Pagination Start -->
+                <div class="bottom-strip">
+                    <div class="left-auto df ac ">
+                        <div class="pagination">
+                            <ul class="df ac">
+                                <li>Pages {{pageNo}} of {{totalPages}}</li>
+                                <li (click)="pageNo == 1 ? '' : pagination('previous')"><a matRipple class="back"
+                                        matTooltip="Previous" matTooltipPosition="above"><i
+                                            class="material-icons">chevron_left</i></a></li>
+                                <li><input autocomplete="off" type="text" (keyup.enter)="pagination('pageNo')"
+                                        name="pageNo" [(ngModel)]="pageNo" placeholder="Go To"></li>
+                                <li (click)="totalLength == data.length ? '' :pagination('next')"><a matRipple
+                                        class="next" matTooltip="Next" matTooltipPosition="above"><i
+                                            class="material-icons">chevron_right</i></a></li>
+                            </ul>
+                        </div>
+                        <div class="bottom-fix" (click)="downloadExcel()">
+                            <a class="excel" matRipple matTooltip="Excel" matTooltipPosition="above"><img
+                                    src="assets/img/excel.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination End -->
+            </div>
+        </ng-container>
+
+
+        <!-- remove column wise skeleton add row wise as it needs to set column width accordingly -->
+        <ng-container *ngIf="!reqSent">
+
+            <section id="head" class="ac">
+                <div class="module-name form-heading">
+                    <h2>&nbsp;</h2>
+                </div>
+
+                <div class="left-auto">
+                    <div class="form-skeleton">
+                        <a mat-button>&nbsp;</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container-pd10-5 bottom-calc no-padding tab-space">
+                <div class="tlp_table">
+                    <figure class="table-head">
+                        <section class="th_cell">
+                            <main class="skeleton">
+                                <div class="div_cell mmw50 text-center af-bdr-left">&nbsp;</div>
+                                <div class="div_cell ">&nbsp;</div>
+                                <div class="div_cell mmw100">&nbsp;</div>
+                                <div class="div_cell mmw150">&nbsp;</div>
+                                <div class="div_cell mmw100">&nbsp;</div>
+                                <div class="div_cell text-center mmw70 af-bdr-right">&nbsp;</div>
+                            </main>
+                        </section>
+                        <section class="th_cell">
+                            <main class="skeleton">
+                                <div class="div_cell mmw50 text-center af-bdr-left">&nbsp;</div>
+                                <div class="div_cell ">&nbsp;</div>
+                                <div class="div_cell mmw100">&nbsp;</div>
+                                <div class="div_cell mmw150">&nbsp;</div>
+                                <div class="div_cell mmw100">&nbsp;</div>
+                                <div class="div_cell text-center mmw70 af-bdr-right">&nbsp;</div>
+                            </main>
+                        </section>
+                    </figure>
+                    <!-- Table Head End -->
+
+                    <section class="td_cell">
+                        <!-- skeleton Data -->
+                        <main class="skeleton" *ngFor="let row of this.db.skeletonArr">
+                            <div class="div_cell mmw50 text-center af-bdr-left">&nbsp;</div>
+                            <div class="div_cell ">&nbsp;</div>
+                            <div class="div_cell mmw100">&nbsp;</div>
+                            <div class="div_cell mmw150">&nbsp;</div>
+                            <div class="div_cell mmw100">&nbsp;</div>
+                            <div class="div_cell text-center mmw70 af-bdr-right">&nbsp;</div>
+                        </main>
+                        <!-- skeleton Data -->
+                    </section>
+
+                </div>
+            </div>
+        </ng-container>
+        <!--  -->
+
+    </div>
+</div>

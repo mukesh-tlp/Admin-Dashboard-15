@@ -1,0 +1,23 @@
+<div class="left-navigation">
+    <div class="tlp_navigation">
+        <ul>
+            <ng-container *ngFor="let row of navigationData">
+                <li [ngClass]="{'active' : (tabActiveType[row.slug] == true && tab[row.slug] == true )}" class="{{row.dropDown.length ? 'dropdown' : ''}}" (click)="getData(false);row.dropDown.length ? backNav() : ''"   >
+                    <a matRipple routerLink="{{row.slug}}"    routerLinkActive="active" (click)="tabActive(row.slug)">
+                        <img [src]="row.icon"><span>{{row.name}}</span>
+                        <span class="tlp_badge" *ngIf="row?.count_show">{{row?.count}}</span>
+                    </a>
+                    
+                    <ul *ngIf="row.dropDown?.length" (click)="drRefreshEvent()">
+                        <li  *ngFor="let item of row.dropDown">
+                            <a  matRipple routerLink="{{item.slug}}" routerLinkActive="active">
+                                {{item.name}}
+                                <span class="tlp_badge" *ngIf="item.count_show">{{item.count}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>

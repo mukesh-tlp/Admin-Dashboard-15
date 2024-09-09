@@ -1,0 +1,10 @@
+
+<div mat-dialog-title class="model-head" style="min-width: 460px">
+    <h2>View Image</h2>
+    <a class="close-model" mat-button  [mat-dialog-close]><i class="material-icons">close</i></a>
+</div>
+<div class="fix_modalimg">
+    <a class="zoom_btn" mat-button (click)="openUrl()"><i class="material-icons">open_in_new</i></a>
+
+    <img [src]="data">
+</div>
